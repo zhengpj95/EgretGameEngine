@@ -15,24 +15,24 @@ class RpgTiles extends egret.DisplayObjectContainer {
 
     public init(mapId: number): void {
         this.mapId = mapId;
-        var mapData: any = RES.getRes("map_" + mapId + "_data.json");
+        let mapData: any = RES.getRes("map_" + mapId + "_data.json");
 
         this.cols = Math.floor(mapData.width / RpgGameData.GameTileWidth);
         this.rows = Math.floor(mapData.height / RpgGameData.GameTileHeight);
     }
 
     public updateCameraPos($x: number, $y: number): void {
-        var currCol: number = Math.round($x / RpgGameData.GameTileWidth);
-        var currRow: number = Math.round($y / RpgGameData.GameTileHeight);
+        let currCol: number = Math.round($x / RpgGameData.GameTileWidth);
+        let currRow: number = Math.round($y / RpgGameData.GameTileHeight);
 
-        var screenCols: number = Math.ceil(App.StageUtils.getWidth() / RpgGameData.GameTileWidth) + 1;
-        var screenRows: number = Math.ceil(App.StageUtils.getHeight() / RpgGameData.GameTileHeight) + 1;
+        let screenCols: number = Math.ceil(App.StageUtils.getWidth() / RpgGameData.GameTileWidth) + 1;
+        let screenRows: number = Math.ceil(App.StageUtils.getHeight() / RpgGameData.GameTileHeight) + 1;
 
-        var halfScreenCols: number = Math.ceil(screenCols / 2);
-        var halfScreenRows: number = Math.ceil(screenRows / 2);
+        let halfScreenCols: number = Math.ceil(screenCols / 2);
+        let halfScreenRows: number = Math.ceil(screenRows / 2);
 
-        var minCol: number = currCol - halfScreenCols;
-        var maxCol: number = currCol + halfScreenCols;
+        let minCol: number = currCol - halfScreenCols;
+        let maxCol: number = currCol + halfScreenCols;
         if (minCol < 0) {
             maxCol += -minCol;
             minCol = 0;
@@ -41,8 +41,8 @@ class RpgTiles extends egret.DisplayObjectContainer {
             minCol -= (maxCol - this.cols);
             maxCol = this.cols;
         }
-        var minRow: number = currRow - halfScreenRows;
-        var maxRow: number = currRow + halfScreenRows;
+        let minRow: number = currRow - halfScreenRows;
+        let maxRow: number = currRow + halfScreenRows;
         if (minRow < 0) {
             maxRow += -minRow;
             minRow = 0;
@@ -52,11 +52,11 @@ class RpgTiles extends egret.DisplayObjectContainer {
             maxRow = this.rows;
         }
 
-        var screenTiles = [];
-        for (var i = minCol; i <= maxCol; i++) {
-            for (var j = minRow; j <= maxRow; j++) {
-                var tileKey: string = i + "_" + j;
-                var tile: RpgTile = this.tiles[tileKey];
+        let screenTiles = [];
+        for (let i = minCol; i <= maxCol; i++) {
+            for (let j = minRow; j <= maxRow; j++) {
+                let tileKey: string = i + "_" + j;
+                let tile: RpgTile = this.tiles[tileKey];
                 if (!tile) {
                     tile = new RpgTile();
                     tile.init(this.mapId, i, j);
@@ -72,7 +72,7 @@ class RpgTiles extends egret.DisplayObjectContainer {
         //移除不在屏幕内的格子
         this.screenTiles.forEach(function (tileKey: string) {
             if (screenTiles.indexOf(tileKey) == -1) {
-                var tile: RpgTile = this.tiles[tileKey];
+                let tile: RpgTile = this.tiles[tileKey];
                 tile && App.DisplayUtils.removeFromParent(tile);
             }
         }.bind(this));
@@ -80,10 +80,10 @@ class RpgTiles extends egret.DisplayObjectContainer {
     }
 
     public destory(): void {
-        var keys: string[] = Object.keys(this.tiles);
-        for (var i = 0; i < keys.length; i++) {
-            var key: string = keys[i];
-            var tile: RpgTile = this.tiles[key];
+        let keys: string[] = Object.keys(this.tiles);
+        for (let i = 0; i < keys.length; i++) {
+            let key: string = keys[i];
+            let tile: RpgTile = this.tiles[key];
             tile.destory();
 
             this.tiles[key] = null;

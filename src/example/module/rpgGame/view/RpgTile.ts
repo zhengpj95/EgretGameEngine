@@ -16,8 +16,8 @@ class RpgTile extends egret.Bitmap {
         this.x = this.col * RpgGameData.GameTileWidth;
         this.y = this.row * RpgGameData.GameTileHeight;
 
-        var tileResName: string = row + "_" + col + ".jpg";
-        var tileResPath: string = "resource/assets/rpgGame/map/" + mapId + "/" + tileResName;
+        let tileResName: string = row + "_" + col + ".jpg";
+        let tileResPath: string = "resource/assets/rpgGame/map/" + mapId + "/" + tileResName;
         this.tileResKey = "map_" + mapId + "_" + tileResName;
 
         //异步加载
