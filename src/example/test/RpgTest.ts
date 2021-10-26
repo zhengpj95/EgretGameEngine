@@ -13,16 +13,16 @@ class RpgTest {
         this.initMapResource();
 
         //加载资源
-        var groupName: string = "preload_RpgTest";
-        var subGroups: Array<string> = ["preload_core", "preload_ui", "preload_rpg", this.mapGroupKey];
+        let groupName: string = "preload_RpgTest";
+        let subGroups: Array<string> = ["preload_core", "preload_ui", "preload_rpg", this.mapGroupKey];
         App.ResourceUtils.loadGroups(groupName, subGroups, this.onResourceLoadComplete, this.onResourceLoadProgress, this);
     }
 
     private initMapResource(): void {
-        var mapResPath: string = "resource/assets/rpgGame/map/" + this.mapId + "/";
-        var mapResKey: string = this.mapGroupKey + "_";
-        var mapResKeys: string[] = [];
-        var mapRes: any[] = [
+        let mapResPath: string = "resource/assets/rpgGame/map/" + this.mapId + "/";
+        let mapResKey: string = this.mapGroupKey + "_";
+        let mapResKeys: string[] = [];
+        let mapRes: any[] = [
             {
                 name: "data.json",
                 type: "json"
@@ -33,10 +33,10 @@ class RpgTest {
             }
         ];
         mapRes.forEach(function (res) {
-            var resKey: string = mapResKey + res.name;
+            let resKey: string = mapResKey + res.name;
             App.ResourceUtils.createResource(resKey, res.type, mapResPath + res.name);
             mapResKeys.push(resKey);
-        })
+        });
 
         App.ResourceUtils.createGroup(this.mapGroupKey, mapResKeys);
     }

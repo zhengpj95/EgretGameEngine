@@ -23,7 +23,7 @@ class ControllerManager extends SingtonClass {
     /**
      * 动态添加的Controller
      * @param key 唯一标识
-     * @param manager Manager
+     * @param control
      *
      */
     public register(key: number, control: BaseController): void {
@@ -60,13 +60,14 @@ class ControllerManager extends SingtonClass {
      * 跨模块消息传递
      * @param controllerD Controller唯一标识
      * @param key 消息唯一标识
-     *
+     * @param param
      */
     public applyFunc(controllerD: number, key: number, ...param: any[]): any {
-        var manager: BaseController = this._modules[controllerD];
+        let manager: BaseController = this._modules[controllerD];
         if (manager) {
-            var params = [];
-            for (var i = 1; i < arguments.length; i++) {
+            let params = [];
+            //注意这里是 arguments，其已经包括函数的所有参数了，所以从 1 开始
+            for (let i = 1; i < arguments.length; i++) {
                 params[i - 1] = arguments[i];
             }
             return manager.applyFunc.apply(manager, params);
@@ -82,7 +83,7 @@ class ControllerManager extends SingtonClass {
      * @returns {BaseModel}
      */
     public getControllerModel(controllerD: number): BaseModel {
-        var manager: BaseController = this._modules[controllerD];
+        let manager: BaseController = this._modules[controllerD];
         if (manager) {
             return manager.getModel();
         }
