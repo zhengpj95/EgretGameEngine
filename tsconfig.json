@@ -1,5 +1,7 @@
 {
 	"compilerOptions": {
+		"sourceMap": true,
+		"removeComments": true,
 		"target": "es5",
 		"outDir": "bin-debug",
 		"experimentalDecorators": true,
