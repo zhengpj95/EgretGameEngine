@@ -37,7 +37,7 @@ class BaseController {
      *
      */
     public applyFunc(key: any, ...param: any[]): any {
-        var listen: any = this._messages[key];
+        let listen: any = this._messages[key];
         if (listen) {
             return listen[0].apply(listen[1], param);
         } else {
@@ -84,12 +84,12 @@ class BaseController {
 
     /**
      * View注册
-     * @param viewClassZ View的类
+     * @param viewClass View的类
      * @param viewId View的ID
      * @param viewParent View的父级
      * @returns {IBaseView}
      */
-    public registerView<T>(viewClass: { new (...args): T }, viewId: number, viewParent: egret.DisplayObjectContainer): T {
+    public registerView<T>(viewClass: { new(...args): T }, viewId: number, viewParent: egret.DisplayObjectContainer): T {
         let view = new viewClass(this, viewParent);
         App.ViewManager.register(viewId, <any>view);
         return view;

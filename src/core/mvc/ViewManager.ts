@@ -75,22 +75,21 @@ class ViewManager extends SingtonClass {
      *
      */
     public open(key: number, ...param: any[]): IBaseView {
-        var view: IBaseView = this.getView(key);
+        let view: IBaseView = this.getView(key);
         if (view == null) {
             Log.warn("UI_" + key + "不存在");
             return;
         }
 
         if (view.isShow()) {
-            view.open(...param);;
+            view.open(...param);
             return view;
         }
 
         if (view.isInit()) {
             view.addToParent();
-            view.open(...param);;
-        }
-        else {
+            view.open(...param);
+        } else {
             App.EasyLoading.showLoading();
             view.loadResource(function () {
                 view.setVisible(false);
@@ -119,12 +118,12 @@ class ViewManager extends SingtonClass {
             return;
         }
 
-        var view: IBaseView = this.getView(key);
+        let view: IBaseView = this.getView(key);
         if (view == null) {
             return;
         }
 
-        var viewIndex = this._opens.indexOf(key);
+        let viewIndex = this._opens.indexOf(key);
         if (viewIndex >= 0) {
             this._opens.splice(viewIndex, 1);
         }
@@ -139,9 +138,9 @@ class ViewManager extends SingtonClass {
      * @param param
      */
     public closeView(view: IBaseView, ...param: any[]): void {
-        var keys = Object.keys(this._views);
-        for (var i: number = 0, len = keys.length; i < len; i++) {
-            var key: number = parseInt(keys[i]);
+        let keys = Object.keys(this._views);
+        for (let i: number = 0, len = keys.length; i < len; i++) {
+            let key: number = parseInt(keys[i]);
             if (this._views[key] == view) {
                 this.close(key, param);
                 return;

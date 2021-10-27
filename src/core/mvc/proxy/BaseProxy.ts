@@ -3,13 +3,13 @@
  * Proxy基类
  */
 class BaseProxy {
-    private _controller:BaseController;
+    private _controller: BaseController;
 
     /**
      * 构造函数
      * @param $controller 所属模块
      */
-    public constructor($controller:BaseController) {
+    public constructor($controller: BaseController) {
         this._controller = $controller;
     }
 
@@ -19,7 +19,7 @@ class BaseProxy {
      * @param param 参数
      *
      */
-    public applyFunc(key:any, ...param:any[]):any {
+    public applyFunc(key: any, ...param: any[]): any {
         return this._controller.applyFunc.apply(this._controller, arguments);
     }
 
@@ -30,7 +30,7 @@ class BaseProxy {
      * @param param 所需参数
      *
      */
-    public applyControllerFunc(controllerKey:number, key:any, ...param:any[]):any {
+    public applyControllerFunc(controllerKey: number, key: any, ...param: any[]): any {
         return this._controller.applyControllerFunc.apply(this._controller, arguments);
     }
 
@@ -40,7 +40,7 @@ class BaseProxy {
      * @param callbackFunc 处理函数
      * @param callbackObj 处理函数所属对象
      */
-    public receiveServerMsg(key:any, callbackFunc:Function, callbackObj:any):void {
+    public receiveServerMsg(key: any, callbackFunc: Function, callbackObj: any): void {
         App.MessageCenter.addListener(key, callbackFunc, callbackObj);
     }
 
@@ -50,11 +50,11 @@ class BaseProxy {
      * @param callbackFunc 处理函数
      * @param callbackObj 处理函数所属对象
      */
-    public receiveServerMsgOnce(key:any, callbackFunc:Function, callbackObj:any):void {
-        var callback:Function = function(param:any):void {
+    public receiveServerMsgOnce(key: any, callbackFunc: Function, callbackObj: any): void {
+        let callback: Function = function (param: any): void {
             this.removeServerMsg(key, callback, this);
             callbackFunc.apply(callbackObj, param);
-        }
+        };
         this.receiveServerMsg(key, callback, this);
     }
 
@@ -64,7 +64,7 @@ class BaseProxy {
      * @param callbackFunc 处理函数
      * @param callbackObj 处理函数所属对象
      */
-    public receiveServerHttpUpdateMsg(key:any, callbackFunc:Function, callbackObj:any):void {
+    public receiveServerHttpUpdateMsg(key: any, callbackFunc: Function, callbackObj: any): void {
         this.receiveServerMsg(key + "_HttpUpdate", callbackFunc, callbackObj);
     }
 
@@ -74,7 +74,7 @@ class BaseProxy {
      * @param callbackFunc 处理函数
      * @param callbackObj 处理函数所属对象
      */
-    public receiveServerHttpUpdateMsgOnce(key:any, callbackFunc:Function, callbackObj:any):void {
+    public receiveServerHttpUpdateMsgOnce(key: any, callbackFunc: Function, callbackObj: any): void {
         this.receiveServerMsgOnce(key + "_HttpUpdate", callbackFunc, callbackObj);
     }
 
@@ -84,7 +84,7 @@ class BaseProxy {
      * @param callbackFunc 处理函数
      * @param callbackObj 处理函数所属对象
      */
-    public removeServerMsg(key:any, callbackFunc:Function, callbackObj:any):void {
+    public removeServerMsg(key: any, callbackFunc: Function, callbackObj: any): void {
         App.MessageCenter.removeListener(key, callbackFunc, callbackObj);
     }
 
@@ -94,23 +94,23 @@ class BaseProxy {
      * @param callbackFunc 处理函数
      * @param callbackObj 处理函数所属对象
      */
-    public removeServerHttpUpdateMsg(key:any, callbackFunc:Function, callbackObj:any):void {
+    public removeServerHttpUpdateMsg(key: any, callbackFunc: Function, callbackObj: any): void {
         this.removeServerMsg(key + "_HttpUpdate", callbackFunc, callbackObj);
     }
 
     /**
      * 发送消息到Socket服务器
      */
-    public sendSocketMsg(msg:any):void {
+    public sendSocketMsg(msg: any): void {
         App.Socket.send(msg);
     }
 
     /**
      * 发送消息到Http服务端
      * @param type 消息标识 例如: User.login
-     * @param paramObj 消息参数 例如: var paramObj:any = {"uName":uName, "uPass":uPass};
+     * @param paramObj 消息参数 例如: let paramObj:any = {"uName":uName, "uPass":uPass};
      */
-    public sendHttpMsg(type:string, paramObj:any = null):void {
+    public sendHttpMsg(type: string, paramObj: any = null): void {
         App.Http.send(type, this.getURLVariables(type, paramObj));
     }
 
@@ -120,17 +120,17 @@ class BaseProxy {
      * @param t_paramObj
      * @returns {egret.URLVariables}
      */
-    private getURLVariables(t_type:string, t_paramObj:any):egret.URLVariables {
-        var typeArr:Array<any> = t_type.split(".");
-        var paramObj:any = {};
+    private getURLVariables(t_type: string, t_paramObj: any): egret.URLVariables {
+        let typeArr: Array<any> = t_type.split(".");
+        let paramObj: any = {};
         paramObj["mod"] = typeArr[0];
         paramObj["do"] = typeArr[1];
         if (t_paramObj != null) {
             paramObj["p"] = t_paramObj;
         }
 
-        var param:string = JSON.stringify(paramObj);
-        var variables:egret.URLVariables = new egret.URLVariables("data=" + param + "&h=" + App.ProxyUserFlag);
+        let param: string = JSON.stringify(paramObj);
+        let variables: egret.URLVariables = new egret.URLVariables("data=" + param + "&h=" + App.ProxyUserFlag);
         return variables;
     }
 }

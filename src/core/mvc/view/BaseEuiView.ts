@@ -3,17 +3,17 @@
  * View基类，继承自eui.Component
  */
 class BaseEuiView extends eui.Component implements IBaseView {
-    private _controller:BaseController;
-    private _myParent:egret.DisplayObjectContainer;
-    private _isInit:boolean;
-    private _resources:string[] = null;
+    private _controller: BaseController;
+    private _myParent: egret.DisplayObjectContainer;
+    private _isInit: boolean;
+    private _resources: string[] = null;
 
     /**
      * 构造函数
      * @param $controller 所属模块
      * @param $parent 父级
      */
-    public constructor($controller:BaseController, $parent:egret.DisplayObjectContainer) {
+    public constructor($controller: BaseController, $parent: egret.DisplayObjectContainer) {
         super();
         this._controller = $controller;
         this._myParent = $parent;
@@ -27,7 +27,7 @@ class BaseEuiView extends eui.Component implements IBaseView {
      * 获取我的父级
      * @returns {egret.DisplayObjectContainer}
      */
-    public get myParent():egret.DisplayObjectContainer {
+    public get myParent(): egret.DisplayObjectContainer {
         return this._myParent;
     }
 
@@ -35,7 +35,7 @@ class BaseEuiView extends eui.Component implements IBaseView {
      * 设置初始加载资源
      * @param resources
      */
-    public setResources(resources:string[]):void {
+    public setResources(resources: string[]): void {
         this._resources = resources;
     }
 
@@ -43,7 +43,7 @@ class BaseEuiView extends eui.Component implements IBaseView {
      * 是否已经初始化
      * @returns {boolean}
      */
-    public isInit():boolean {
+    public isInit(): boolean {
         return this._isInit;
     }
 
@@ -53,7 +53,7 @@ class BaseEuiView extends eui.Component implements IBaseView {
      * @param param 参数
      *
      */
-    public applyFunc(key:any, ...param:any[]):any {
+    public applyFunc(key: any, ...param: any[]): any {
         return this._controller.applyFunc.apply(this._controller, arguments);
     }
 
@@ -64,7 +64,7 @@ class BaseEuiView extends eui.Component implements IBaseView {
      * @param param 所需参数
      *
      */
-    public applyControllerFunc(controllerKey:number, key:any, ...param:any[]):any {
+    public applyControllerFunc(controllerKey: number, key: any, ...param: any[]): any {
         return this._controller.applyControllerFunc.apply(this._controller, arguments);
     }
 
@@ -73,21 +73,21 @@ class BaseEuiView extends eui.Component implements IBaseView {
      * @return
      *
      */
-    public isShow():boolean {
+    public isShow(): boolean {
         return this.stage != null && this.visible;
     }
 
     /**
      * 添加到父级
      */
-    public addToParent():void {
+    public addToParent(): void {
         this._myParent.addChild(this);
     }
 
     /**
      * 从父级移除
      */
-    public removeFromParent():void {
+    public removeFromParent(): void {
         App.DisplayUtils.removeFromParent(this);
     }
 
@@ -95,7 +95,7 @@ class BaseEuiView extends eui.Component implements IBaseView {
      *对面板进行显示初始化，用于子类继承
      *
      */
-    public initUI():void {
+    public initUI(): void {
         this._isInit = true;
     }
 
@@ -103,14 +103,14 @@ class BaseEuiView extends eui.Component implements IBaseView {
      *对面板数据的初始化，用于子类继承
      *
      */
-    public initData():void {
+    public initData(): void {
 
     }
 
     /**
      * 销毁
      */
-    public destroy():void {
+    public destroy(): void {
         this._controller = null;
         this._myParent = null;
         this._resources = null;
@@ -120,7 +120,7 @@ class BaseEuiView extends eui.Component implements IBaseView {
      * 面板开启执行函数，用于子类继承
      * @param param 参数
      */
-    public open(...param:any[]):void {
+    public open(...param: any[]): void {
 
     }
 
@@ -128,7 +128,7 @@ class BaseEuiView extends eui.Component implements IBaseView {
      * 面板关闭执行函数，用于子类继承
      * @param param 参数
      */
-    public close(...param:any[]):void {
+    public close(...param: any[]): void {
 
     }
 
@@ -136,12 +136,11 @@ class BaseEuiView extends eui.Component implements IBaseView {
      /**
      * 加载面板所需资源
      */
-    public loadResource(loadComplete:Function, initComplete:Function):void {
+    public loadResource(loadComplete: Function, initComplete: Function): void {
         if (this._resources && this._resources.length > 0) {
             App.ResourceUtils.loadResource(this._resources, [], loadComplete, null, this);
             this.once(eui.UIEvent.CREATION_COMPLETE, initComplete, this);
-        }
-        else {
+        } else {
             loadComplete();
             initComplete();
         }
@@ -151,7 +150,7 @@ class BaseEuiView extends eui.Component implements IBaseView {
      * 设置是否隐藏
      * @param value
      */
-    public setVisible(value:boolean):void {
+    public setVisible(value: boolean): void {
         this.visible = value;
     }
 }
