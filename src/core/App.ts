@@ -11,7 +11,13 @@ class App {
      * 全局配置数据
      * @type {null}
      */
-    public static GlobalData: any = null;
+    public static GlobalData: {
+        IsDebug: boolean;
+        HttpServer: string;
+        SocketServer: string;
+        SocketPort: string;
+        ProtoConfig: string;
+    } = null;
     /**
      * ProtoConfig
      * @type {null}
@@ -319,7 +325,7 @@ class App {
         //扩展功能初始化
         App.EgretExpandUtils.init();
         //实例化Http请求
-        App.Http.initServer(App.GlobalData.HttpSerever);
+        App.Http.initServer(App.GlobalData.HttpServer);
         //实例化ProtoBuf和Socket请求
         App.ProtoConfig = RES.getRes(App.GlobalData.ProtoConfig);
         App.Socket.initServer(App.GlobalData.SocketServer, App.GlobalData.SocketPort, new ByteArrayMsgByProtobuf());
