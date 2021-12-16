@@ -24,8 +24,7 @@ class TimerManager extends SingtonClass {
         this._count = 0;
         this._timeScale = 1;
 
-        egret.startTick(this.onEnterFrame, this);
-        // egret.Ticker.getInstance().register(this.onEnterFrame, this);
+        egret.Ticker.getInstance().register(this.onEnterFrame, this);
     }
 
     /**
@@ -40,7 +39,7 @@ class TimerManager extends SingtonClass {
      * 每帧执行函数
      * @param frameTime
      */
-    private onEnterFrame(frameTime = 0): boolean {
+    private onEnterFrame(): void {
         if (this._isPause) {
             return;
         }
