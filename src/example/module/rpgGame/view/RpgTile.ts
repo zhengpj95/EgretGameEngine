@@ -11,6 +11,7 @@ class RpgTile extends egret.Bitmap {
     }
 
     public init(mapId: number, col: number, row: number) {
+        this.name = `map_${mapId}_${col}_${row}`;
         this.col = col;
         this.row = row;
         this.x = this.col * RpgGameData.GameTileWidth;
