@@ -6,7 +6,7 @@ class Component {
     public dealInterval: number;
 
     public entity: RpgGameObject;
-    public isRuning: boolean;
+    public isRunning: boolean;
     public type: string;
 
     public constructor() {
@@ -15,7 +15,7 @@ class Component {
     public start(): void {
         this.dealTime = 0;
         this.dealInterval = 0;
-        this.isRuning = true;
+        this.isRunning = true;
     }
 
     public stop(): void {
@@ -23,7 +23,7 @@ class Component {
         this.dealInterval = null;
 
         this.entity = null;
-        this.isRuning = false;
+        this.isRunning = false;
         this.type = null;
     }
 

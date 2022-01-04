@@ -47,7 +47,7 @@ class ComponentSystem {
             return;
         }
         arr.forEach(function (component: Component) {
-            if (!component.isRuning) {
+            if (!component.isRunning) {
                 return;
             }
 

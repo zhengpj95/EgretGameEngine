@@ -69,7 +69,7 @@ class AvatarSkillComponent extends Component {
     }
 
     private onLoadComplate(): void {
-        if (!this.isRuning) {
+        if (!this.isRunning) {
             return;
         }
 
