@@ -456,10 +456,16 @@ class Grid {
     }
 
     public setEndNode(x: number, y: number): void {
+        if (!this._nodes[x]) {
+            return;
+        }
         this._endNode = this._nodes[x][y];
     }
 
     public setStartNode(x: number, y: number): void {
+        if (!this._nodes[x]) {
+            return;
+        }
         this._startNode = this._nodes[x][y];
     }
 
