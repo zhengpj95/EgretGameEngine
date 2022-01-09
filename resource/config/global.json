@@ -1,7 +1,8 @@
 {
-    "IsDebug":true,
+    "IsDebug":false,
     "HttpServer":"https://www.baidu.com",
     "SocketServer":"10.0.3.111",
     "SocketPort":"10001/ws",
-    "ProtoConfig":"simple_config"
+    "ProtoConfig":"simple_config",
+    "Music": false
 }

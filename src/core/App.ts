@@ -17,6 +17,7 @@ class App {
         SocketServer: string;
         SocketPort: string;
         ProtoConfig: string;
+        Music: boolean;
     } = null;
     /**
      * ProtoConfig

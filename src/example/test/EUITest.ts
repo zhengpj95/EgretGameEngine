@@ -17,8 +17,10 @@ class EUITest{
         App.Init();
 
         //音乐音效处理
-        App.SoundManager.setBgOn(true);
-        App.SoundManager.setEffectOn(!App.DeviceUtils.IsHtml5 || !App.DeviceUtils.IsMobile);
+        let isMusic = App.GlobalData.Music;
+        App.SoundManager.setBgOn(isMusic);
+        App.SoundManager.setEffectOn(isMusic);
+        // App.SoundManager.setEffectOn(!App.DeviceUtils.IsHtml5 || !App.DeviceUtils.IsMobile);
 
         App.SceneManager.runScene(SceneConsts.UI);
     }

@@ -49,8 +49,9 @@ class RpgTest {
         App.Init();
 
         //音乐音效处理
-        App.SoundManager.setBgOn(true);
-        App.SoundManager.setEffectOn(true);
+        let isMusic = App.GlobalData.Music;
+        App.SoundManager.setBgOn(isMusic);
+        App.SoundManager.setEffectOn(isMusic);
 
         //进入游戏
         App.SceneManager.runScene(SceneConsts.RpgGame, this.mapId);
