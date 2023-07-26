@@ -43,7 +43,9 @@ class Main extends egret.DisplayObjectContainer {
 	}
 
 	private onResize(): void {
-		App.ControllerManager.applyFunc(ControllerConst.RpgGame, RpgGameConst.GameResize);
+		if (App.ControllerManager.isExists(ControllerConst.RpgGame)) {
+			App.ControllerManager.applyFunc(ControllerConst.RpgGame, RpgGameConst.GameResize);
+		}
 	}
 
 	private loadResConfig(): void {
@@ -77,8 +79,13 @@ class Main extends egret.DisplayObjectContainer {
 
 		//开启游戏
 		new RpgTest();
-		new ProtoBufTest();
 		// new EUITest();
+
+		// 需要搭建服务端，需要处理resource/config/global.json
+		// new ProtoBufTest();
+		// 未完成的测试案例，不可调试
+		// new ActTest();
+		// new StarlingSwfTest();
 	}
 
 	/**
