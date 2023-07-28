@@ -18,6 +18,9 @@ class AvatarComponent extends Component {
 
         this.body = ObjectPool.pop("egret.DisplayObjectContainer");
         this.body.addChild(this.mc);
+        if (this.entity.data.objectType == ObjectType.Player) {
+            this.body.name = '_rpgPlayer';
+        }
         this.entity.gameView.getGameObjcetLayer().addChild(this.body);
 
         this.startLoad();
@@ -29,6 +32,7 @@ class AvatarComponent extends Component {
         this.mc.destroy();
         this.mc = null;
 
+        this.body.name = null;
         App.DisplayUtils.removeFromParent(this.body);
         ObjectPool.push(this.body);
         this.body.removeChildren();

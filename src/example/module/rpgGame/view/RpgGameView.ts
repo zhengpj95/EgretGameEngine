@@ -20,9 +20,11 @@ class RpgGameView extends BaseSpriteView {
         this.addChild(this.background);
 
         this.gameObjcetLayer = new egret.DisplayObjectContainer();
+        this.gameObjcetLayer.name = '_gameObjectLayer';
         this.addChild(this.gameObjcetLayer);
 
         this.gameEffectLayer = new egret.DisplayObjectContainer();
+        this.gameEffectLayer.name = '_gameEffectLayer';
         this.addChild(this.gameEffectLayer);
     }
 
@@ -39,7 +41,7 @@ class RpgGameView extends BaseSpriteView {
     public open(...param: any[]): void {
         super.open(param);
 
-        var gameModel: RpgGameModel = param[0];
+        var gameModel: RpgGameModel = param[0];//RpgGameController 传入
 
         this.initBackground(gameModel.mapId);
         this.initBlocks(gameModel.mapId);
@@ -68,12 +70,13 @@ class RpgGameView extends BaseSpriteView {
             mcPath: "resource/assets/rpgGame/player/",
             skillPath: "resource/assets/rpgGame/skill/",
             gameView: this,
-            propertyData: playData.propertyData
+            propertyData: playData.propertyData,
+            objectType: ObjectType.Player
         });
     }
 
     private createMonsters(monsterNum: number): void {
-        var monstersData: any[] = [];
+        var monstersData: RpgGameObjectData[] = [];
         for (var i = 0; i < monsterNum; i++) {
             var col: number = App.RandomUtils.limitInteger(1, this.blocksData[0].length - 2);
             var row: number = App.RandomUtils.limitInteger(1, this.blocksData.length - 2);
@@ -85,23 +88,25 @@ class RpgGameView extends BaseSpriteView {
                 mcName: mcName,
                 mcPath: mcPath,
                 gameView: this,
-                dis: App.MathUtils.getDistance(col, row, this.player.col, this.player.row),
+                // dis: App.MathUtils.getDistance(col, row, this.player.col, this.player.row),
                 propertyData: {
                     name: "monster_" + App.RandomUtils.limitInteger(1, 1000),
                     attackDis: 3,
                     attackInterval: 3000,
                     hp: 2000,
-                }
-            })
+                    dis: App.MathUtils.getDistance(col, row, this.player.col, this.player.row)
+                },
+                objectType: ObjectType.Monster
+            });
         }
 
         monstersData.sort(function (a, b) {
-            if (a.dis < b.dis) {
+            if (a.propertyData.dis < a.propertyData.dis) {
                 return -1;
             } else {
                 return 1;
             }
-        })
+        });
 
         var executor: FrameExecutor = new FrameExecutor(1);
         monstersData.forEach(function (data) {
@@ -133,7 +138,7 @@ class RpgGameView extends BaseSpriteView {
         egret.Tween.get(hpTxt).to({"y": gameObj.y - 250, "alpha": 0}, 1000).call(function () {
             App.DisplayUtils.removeFromParent(hpTxt);
             ObjectPool.push(hpTxt);
-        })
+        });
     }
 
     public removeMonster(monster: RpgMonster): void {

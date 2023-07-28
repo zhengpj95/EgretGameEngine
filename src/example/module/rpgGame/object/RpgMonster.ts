@@ -6,7 +6,7 @@ class RpgMonster extends RpgGameObject {
         super();
     }
 
-    public init(data: any): void {
+    public init(data: RpgGameObjectData): void {
         super.init(data);
 
         this.addComponent(ComponentType.Aoi);

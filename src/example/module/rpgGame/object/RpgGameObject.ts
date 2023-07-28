@@ -1,8 +1,10 @@
 /**
  * Created by yangsong on 2017/10/11.
+ * 场景实体
  */
 class RpgGameObject {
-    private _components: any;
+    /**实体上所挂载的Component实例*/
+    private _components: { [componentName: string]: Component };
 
     public id: number;
     public x: number;
@@ -19,6 +21,7 @@ class RpgGameObject {
     public action: string;
     public propertyData: any;
     public battleObj: RpgGameObject;
+    private _data: RpgGameObjectData;
 
     private _inCamera: boolean;
     private _path: PathNode[];
@@ -27,7 +30,12 @@ class RpgGameObject {
         this._components = {};
     }
 
-    public init(data: any): void {
+    public get data() {
+        return this._data;
+    }
+
+    public init(data: RpgGameObjectData): void {
+        this._data = data;
         this.id = data.id;
         this.col = data.col;
         this.row = data.row;
@@ -116,4 +124,28 @@ class RpgGameObject {
     public getInCamera(): boolean {
         return this._inCamera;
     }
+}
+
+/**rpg场景实体数据接口*/
+interface RpgGameObjectData {
+    id?: number;
+    col?: number;
+    row?: number;
+    gameView?: RpgGameView;
+    mcPath?: string;
+    mcName?: string;
+    skillPath?: string;
+    speed?: number;
+    dir?: Dir;
+    propertyData?: any;
+    objectType?: ObjectType;
+}
+
+/**实体对象类型*/
+const enum ObjectType {
+    Player = 1,     //玩家
+    Npc = 2,        //Npc
+    Monster = 3,    //怪物
+    Pet = 4,        //宠物
+    DropItem = 5,   //掉落
 }
