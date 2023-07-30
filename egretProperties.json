@@ -47,6 +47,10 @@
 		{
 			"name": "protobuf-bundles",
 			"path": "protobuf/bundles"
+		},
+		{
+			"name": "long",
+			"path": "protobuf/library"
 		}
 	]
 }

@@ -4,6 +4,15 @@ class Main extends egret.DisplayObjectContainer {
 		this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
 	}
 
+	//引入Long包，并挂载到protobuf上
+    public initLong() {
+        let global: any = window;
+        global.Long = global.Long ? global.Long : global.dcodeIO ? global.dcodeIO.Long : undefined;
+
+        protobuf.util.Long = Long;
+        protobuf.configure();
+    }
+
 	private onAddToStage(event: egret.Event) {
 		this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
 
@@ -14,6 +23,7 @@ class Main extends egret.DisplayObjectContainer {
 		//适配方式(全屏适配)
 		App.StageUtils.startFullscreenAdaptation(650, 1000, this.onResize);
 
+        this.initLong();
 		//初始化
 		if (!DEBUG) {
 			this.initLifecycle();

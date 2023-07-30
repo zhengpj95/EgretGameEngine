@@ -22,18 +22,19 @@ class RpgGameController extends BaseController {
     }
 
     private gameInit(mapId: number) {
+        let roleVo = RoleVo.ins;//本玩家信息
         this.gameModel.mapId = mapId;
         this.gameModel.playerData = {
-            mcName: "scenePlayer_0",
+            mcName: roleVo.mcName,
             propertyData: {
-                name: "yangsong",
-                title: "[开发者]",
-                vip: 8,
-                attackDis: 3,
-                attackInterval: 1500,
-                hp: 9999999
+                name: roleVo.name,
+                title: roleVo.title,
+                vip: roleVo.vip,
+                attackDis: roleVo.attackDis,
+                attackInterval: roleVo.attackInterval,
+                hp: roleVo.hp
             }
-        }
+        };
         this.gameModel.monsterNum = 200;
 
         App.ViewManager.open(ViewConst.RpgGame, this.gameModel);

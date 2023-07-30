@@ -1,5 +1,3 @@
-type Long = protobuf.Long;
-
 /** Namespace simple. */
 declare namespace simple {
 
