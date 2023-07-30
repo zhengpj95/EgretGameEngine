@@ -1,9 +1,10 @@
 /**
  * Created by yangsong on 2017/10/11.
+ * 相当于场景界面，包含地图层，玩家模型层，特效处理层等
  */
 class RpgGameView extends BaseSpriteView {
     private background: RpgBackground;
-    private gameObjcetLayer: egret.DisplayObjectContainer;
+    private gameObjectLayer: egret.DisplayObjectContainer;
     private gameEffectLayer: egret.DisplayObjectContainer;
     private blocksData: number[][];
     private player: RpgPlayer;
@@ -19,9 +20,9 @@ class RpgGameView extends BaseSpriteView {
         this.background = new RpgBackground();
         this.addChild(this.background);
 
-        this.gameObjcetLayer = new egret.DisplayObjectContainer();
-        this.gameObjcetLayer.name = '_gameObjectLayer';
-        this.addChild(this.gameObjcetLayer);
+        this.gameObjectLayer = new egret.DisplayObjectContainer();
+        this.gameObjectLayer.name = '_gameObjectLayer';
+        this.addChild(this.gameObjectLayer);
 
         this.gameEffectLayer = new egret.DisplayObjectContainer();
         this.gameEffectLayer.name = '_gameEffectLayer';
@@ -41,7 +42,7 @@ class RpgGameView extends BaseSpriteView {
     public open(...param: any[]): void {
         super.open(param);
 
-        var gameModel: RpgGameModel = param[0];//RpgGameController 传入
+        const gameModel: RpgGameModel = param[0];//RpgGameController 传入
 
         this.initBackground(gameModel.mapId);
         this.initBlocks(gameModel.mapId);
@@ -54,13 +55,13 @@ class RpgGameView extends BaseSpriteView {
     }
 
     private initBlocks(mapId: number): void {
-        var mapData: any = RES.getRes("map_" + mapId + "_data.json");
+        const mapData: any = RES.getRes("map_" + mapId + "_data.json");
         this.blocksData = mapData.blocks;
     }
 
     private createPlayer(playData: any): void {
-        var col: number = App.RandomUtils.limitInteger(1, this.blocksData[0].length - 2);
-        var row: number = App.RandomUtils.limitInteger(1, this.blocksData.length - 2);
+        const col: number = App.RandomUtils.limitInteger(1, this.blocksData[0].length - 2);
+        const row: number = App.RandomUtils.limitInteger(1, this.blocksData.length - 2);
 
         this.player = ObjectPool.pop("RpgPlayer");
         this.player.init({
@@ -76,7 +77,7 @@ class RpgGameView extends BaseSpriteView {
     }
 
     private createMonsters(monsterNum: number): void {
-        var monstersData: RpgGameObjectVO[] = [];
+        const monstersData: RpgGameObjectVO[] = [];
         for (var i = 0; i < monsterNum; i++) {
             var col: number = App.RandomUtils.limitInteger(1, this.blocksData[0].length - 2);
             var row: number = App.RandomUtils.limitInteger(1, this.blocksData.length - 2);
@@ -108,10 +109,10 @@ class RpgGameView extends BaseSpriteView {
             }
         });
 
-        var executor: FrameExecutor = new FrameExecutor(1);
-        monstersData.forEach(function (data) {
+        const executor: FrameExecutor = new FrameExecutor(1);
+        monstersData.forEach(function (data: RpgGameObjectVO) {
             executor.regist(function () {
-                var monster: RpgMonster = ObjectPool.pop("RpgMonster");
+                const monster: RpgMonster = ObjectPool.pop("RpgMonster");
                 monster.init(data);
                 this.monsters.push(monster);
             }, this);
@@ -120,7 +121,7 @@ class RpgGameView extends BaseSpriteView {
     }
 
     public showHpChange(gameObj: RpgGameObject, changeHp: number, txtColor: number = 0xFF0000): void {
-        var hpTxt: egret.TextField = ObjectPool.pop("egret.TextField");
+        const hpTxt: egret.TextField = ObjectPool.pop("egret.TextField");
         hpTxt.size = 25;
         hpTxt.textColor = txtColor;
         hpTxt.width = 100;
@@ -142,7 +143,7 @@ class RpgGameView extends BaseSpriteView {
     }
 
     public removeMonster(monster: RpgMonster): void {
-        var index: number = this.monsters.indexOf(monster);
+        const index: number = this.monsters.indexOf(monster);
         if (index != -1) {
             this.monsters.splice(index, 1);
         }
@@ -155,7 +156,7 @@ class RpgGameView extends BaseSpriteView {
         if (!this.player) {
             return;
         }
-        var cameraComponent: CameraComponent = <CameraComponent>this.player.getComponent(ComponentType.Camera);
+        const cameraComponent: CameraComponent = <CameraComponent>this.player.getComponent(ComponentType.Camera);
         cameraComponent.dealMoveObjs();
         cameraComponent.dealBgCamera();
     }
@@ -164,8 +165,8 @@ class RpgGameView extends BaseSpriteView {
         return this.blocksData;
     }
 
-    public getGameObjcetLayer(): egret.DisplayObjectContainer {
-        return this.gameObjcetLayer;
+    public getGameObjectLayer(): egret.DisplayObjectContainer {
+        return this.gameObjectLayer;
     }
 
     public getGameEffectLayer(): egret.DisplayObjectContainer {

@@ -23,7 +23,7 @@ class SortComponent extends Component {
     }
 
     private sortGameObjs(): void {
-        this.entity.gameView.getGameObjcetLayer().$children.sort(this.sortF);
+        this.entity.gameView.getGameObjectLayer().$children.sort(this.sortF);
     }
 
     private sortF(d1: egret.DisplayObject, d2: egret.DisplayObject): number {

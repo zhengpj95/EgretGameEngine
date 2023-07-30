@@ -21,7 +21,7 @@ class AvatarComponent extends Component {
         if (this.entity.data.objectType == ObjectType.Player) {
             this.body.name = '_rpgPlayer';
         }
-        this.entity.gameView.getGameObjcetLayer().addChild(this.body);
+        this.entity.gameView.getGameObjectLayer().addChild(this.body);
 
         this.startLoad();
     }

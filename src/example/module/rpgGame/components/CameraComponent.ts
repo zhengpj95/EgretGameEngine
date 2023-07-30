@@ -18,7 +18,7 @@ class CameraComponent extends Component {
 
         this.moveObjs = [];
         this.moveObjs.push(this.entity.gameView.getGameEffectLayer());
-        this.moveObjs.push(this.entity.gameView.getGameObjcetLayer());
+        this.moveObjs.push(this.entity.gameView.getGameObjectLayer());
         this.moveObjs.push(this.entity.gameView.getBackground());
 
         this.background = this.entity.gameView.getBackground();

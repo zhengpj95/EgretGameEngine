@@ -24,7 +24,7 @@ class AoiComponent extends Component {
     }
 
     private setEntityAoi(): void {
-        var gameObjectLayer: egret.DisplayObject = this.entity.gameView.getGameObjcetLayer();
+        var gameObjectLayer: egret.DisplayObject = this.entity.gameView.getGameObjectLayer();
         var minX: number = -gameObjectLayer.x;
         var minY: number = -gameObjectLayer.y;
         var maxX: number = minX + App.StageUtils.getWidth();

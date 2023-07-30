@@ -31,8 +31,8 @@ class ControlComponent extends Component {
     }
 
     private onClick(evt: egret.TouchEvent): void {
-        var gotoX: number = evt.stageX + (-this.entity.gameView.getGameObjcetLayer().x);
-        var gotoY: number = evt.stageY + (-this.entity.gameView.getGameObjcetLayer().y);
+        var gotoX: number = evt.stageX + (-this.entity.gameView.getGameObjectLayer().x);
+        var gotoY: number = evt.stageY + (-this.entity.gameView.getGameObjectLayer().y);
         this.moveTo(gotoX, gotoY);
         this.entity.battleObj = null;
     }
