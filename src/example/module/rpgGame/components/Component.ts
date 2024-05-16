@@ -5,9 +5,9 @@ class Component {
     public dealTime: number;
     public dealInterval: number;
 
-    public entity: RpgGameObject;
-    public isRunning: boolean;
-    public type: string;
+    public entity: RpgGameObject; // 场景实体，在创建场景实体时赋值
+    public isRunning: boolean; // 在运行中
+    public type: string; // ComponentType
 
     public constructor() {
     }

@@ -2,7 +2,7 @@
  * Created by yangsong on 2017/10/11.
  */
 class ComponentSystem {
-    private static _Components: any = {};
+    private static _Components: { [key: string]: Component[] } = {};
 
     public static addComponent(component: Component): void {
         if (!this._Components[component.type]) {
@@ -16,7 +16,7 @@ class ComponentSystem {
             return;
         }
 
-        var index: number = this._Components[component.type].indexOf(component);
+        const index: number = this._Components[component.type].indexOf(component);
         if (index != -1) {
             this._Components[component.type].splice(index, 1);
         }

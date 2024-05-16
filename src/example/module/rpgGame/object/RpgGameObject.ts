@@ -4,7 +4,7 @@
  */
 class RpgGameObject {
     /**实体上所挂载的Component实例*/
-    private _components: { [componentName: string]: Component };
+    private readonly _components: { [componentName: string]: Component };
 
     public id: number;
     public x: number;
@@ -47,14 +47,14 @@ class RpgGameObject {
         this.dir = data.dir || Dir.Bottom;
         this.propertyData = data.propertyData;
 
-        var p: egret.Point = RpgGameUtils.convertCellToXY(this.col, this.row);
+        const p: egret.Point = RpgGameUtils.convertCellToXY(this.col, this.row);
         this.x = p.x;
         this.y = p.y;
         this.action = Action.Stand;
     }
 
     public destroy(): void {
-        var componentNames: string[] = Object.keys(this._components);
+        let componentNames: string[] = Object.keys(this._components);
         while (componentNames.length) {
             var componentName: string = componentNames[0];
             this.removeComponent(componentName);
@@ -68,12 +68,13 @@ class RpgGameObject {
         this.propertyData = null;
     }
 
+    // 把Component挂载到实体身上
     public addComponent(componentName: string): void {
         if (this._components[componentName]) {
             return;
         }
 
-        var component: Component = ObjectPool.pop(componentName);
+        const component: Component = ObjectPool.pop(componentName);
         component.type = componentName;
         component.entity = this;
         component.start();
@@ -83,8 +84,9 @@ class RpgGameObject {
         this._components[componentName] = component;
     }
 
+    // 从实体身上移除Component
     public removeComponent(componentName: string): void {
-        var component: Component = this._components[componentName];
+        const component: Component = this._components[componentName];
         if (!component) {
             return;
         }
@@ -98,9 +100,9 @@ class RpgGameObject {
         delete this._components[componentName];
     }
 
+    // 获取Component
     public getComponent(componentName: string): Component {
-        var hasComponent: Component = this._components[componentName];
-        return hasComponent;
+        return this._components[componentName];
     }
 
     public get path(): PathNode[] {
