@@ -76,7 +76,7 @@ class RpgGameView extends BaseSpriteView {
     }
 
     private createMonsters(monsterNum: number): void {
-        var monstersData: RpgGameObjectData[] = [];
+        var monstersData: RpgGameObjectVO[] = [];
         for (var i = 0; i < monsterNum; i++) {
             var col: number = App.RandomUtils.limitInteger(1, this.blocksData[0].length - 2);
             var row: number = App.RandomUtils.limitInteger(1, this.blocksData.length - 2);
@@ -147,7 +147,7 @@ class RpgGameView extends BaseSpriteView {
             this.monsters.splice(index, 1);
         }
 
-        monster.destory();
+        monster.destroy();
         monster = null;
     }
 

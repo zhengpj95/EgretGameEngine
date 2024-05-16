@@ -21,7 +21,7 @@ class RpgGameObject {
     public action: string;
     public propertyData: any;
     public battleObj: RpgGameObject;
-    private _data: RpgGameObjectData;
+    private _data: RpgGameObjectVO;
 
     private _inCamera: boolean;
     private _path: PathNode[];
@@ -34,7 +34,7 @@ class RpgGameObject {
         return this._data;
     }
 
-    public init(data: RpgGameObjectData): void {
+    public init(data: RpgGameObjectVO): void {
         this._data = data;
         this.id = data.id;
         this.col = data.col;
@@ -53,7 +53,7 @@ class RpgGameObject {
         this.action = Action.Stand;
     }
 
-    public destory(): void {
+    public destroy(): void {
         var componentNames: string[] = Object.keys(this._components);
         while (componentNames.length) {
             var componentName: string = componentNames[0];
@@ -127,7 +127,7 @@ class RpgGameObject {
 }
 
 /**rpg场景实体数据接口*/
-interface RpgGameObjectData {
+interface RpgGameObjectVO {
     id?: number;
     col?: number;
     row?: number;

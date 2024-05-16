@@ -6,7 +6,7 @@ class RpgPlayer extends RpgGameObject {
         super();
     }
 
-    public init(data: RpgGameObjectData): void {
+    public init(data: RpgGameObjectVO): void {
         super.init(data);
 
         this.addComponent(ComponentType.Avatar);
@@ -20,7 +20,7 @@ class RpgPlayer extends RpgGameObject {
         // this.addComponent(ComponentType.Battle);
     }
 
-    public destory(): void {
-        super.destory();
+    public destroy(): void {
+        super.destroy();
     }
 }
