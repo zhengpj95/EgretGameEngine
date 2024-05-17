@@ -15,7 +15,7 @@ class RpgBackground extends egret.DisplayObjectContainer {
     public init(mapId: number) {
         this.mapId = mapId;
 
-        var mapData: any = RES.getRes("map_" + mapId + "_data.json");
+        var mapData: IMapData = RES.getRes("map_" + mapId + "_data.json");
         this.mapWidth = mapData.width;
         this.mapHeight = mapData.height;
 

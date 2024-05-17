@@ -15,7 +15,7 @@ class RpgTiles extends egret.DisplayObjectContainer {
 
     public init(mapId: number): void {
         this.mapId = mapId;
-        let mapData: any = RES.getRes("map_" + mapId + "_data.json");
+        let mapData: IMapData = RES.getRes("map_" + mapId + "_data.json");
 
         this.cols = Math.floor(mapData.width / RpgGameData.GameTileWidth);
         this.rows = Math.floor(mapData.height / RpgGameData.GameTileHeight);

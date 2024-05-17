@@ -55,7 +55,7 @@ class RpgGameView extends BaseSpriteView {
     }
 
     private initBlocks(mapId: number): void {
-        const mapData: any = RES.getRes("map_" + mapId + "_data.json");
+        const mapData: IMapData = RES.getRes("map_" + mapId + "_data.json");
         this.blocksData = mapData.blocks;
     }
 

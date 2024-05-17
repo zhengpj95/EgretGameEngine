@@ -13,3 +13,11 @@ class RpgGameData {
 
     public static WalkSpeed: number = 3;
 }
+
+/**地图json资源数据接口*/
+interface IMapData {
+    path: string;
+    width: number;
+    height: number;
+    blocks: number[][];
+}
