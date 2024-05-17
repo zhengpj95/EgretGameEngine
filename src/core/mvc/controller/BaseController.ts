@@ -78,7 +78,7 @@ class BaseController {
      * @param controllerD Controller唯一标识
      * @returns {BaseModel}
      */
-    public getControllerModel(controllerD: number): BaseModel {
+    public getControllerModel(controllerD: ControllerConst): BaseModel {
         return App.ControllerManager.getControllerModel(controllerD);
     }
 

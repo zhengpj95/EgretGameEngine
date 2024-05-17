@@ -3,7 +3,7 @@
  * Controller管理类
  */
 class ControllerManager extends SingtonClass {
-    private _modules: any;
+    private _modules: { [key: number]: BaseController };
 
     /**
      * 构造函数
@@ -26,7 +26,7 @@ class ControllerManager extends SingtonClass {
      * @param control
      *
      */
-    public register(key: number, control: BaseController): void {
+    public register(key: ControllerConst, control: BaseController): void {
         if (this.isExists(key))
             return;
 
@@ -38,7 +38,7 @@ class ControllerManager extends SingtonClass {
      * @param key 唯一标识
      *
      */
-    public unregister(key: number): void {
+    public unregister(key: ControllerConst): void {
         if (!this.isExists(key))
             return;
 
@@ -52,7 +52,7 @@ class ControllerManager extends SingtonClass {
      * @return Boolean
      *
      */
-    public isExists(key: number): boolean {
+    public isExists(key: ControllerConst): boolean {
         return this._modules[key] != null;
     }
 
@@ -62,7 +62,7 @@ class ControllerManager extends SingtonClass {
      * @param key 消息唯一标识
      * @param param
      */
-    public applyFunc(controllerD: number, key: number, ...param: any[]): any {
+    public applyFunc(controllerD: ControllerConst, key: number, ...param: any[]): any {
         let manager: BaseController = this._modules[controllerD];
         if (manager) {
             let params = [];
@@ -82,11 +82,19 @@ class ControllerManager extends SingtonClass {
      * @param controllerD Controller唯一标识
      * @returns {BaseModel}
      */
-    public getControllerModel(controllerD: number): BaseModel {
+    public getControllerModel(controllerD: ControllerConst): BaseModel {
         let manager: BaseController = this._modules[controllerD];
         if (manager) {
             return manager.getModel();
         }
         return null;
+    }
+
+    /**
+     * 获取指定的Controller
+     * @param controllerD
+     */
+    public getController(controllerD: ControllerConst): BaseController {
+        return this._modules[controllerD]
     }
 }
