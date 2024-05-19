@@ -139,8 +139,19 @@ interface RpgGameObjectVO {
     skillPath?: string;
     speed?: number;
     dir?: Dir;
-    propertyData?: any;
+    propertyData?: IRpgGameObjectPropertyData;
     objectType?: ObjectType;
+}
+
+/**场景实体vo身上的propertyData数据*/
+interface IRpgGameObjectPropertyData {
+    name:string,
+    hp: number
+    attackDis: number,
+    attackInterval: number,
+    title?: string,
+    vip?: number,
+    dis?: number;
 }
 
 /**实体对象类型*/

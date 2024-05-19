@@ -3,7 +3,10 @@
  */
 class RpgGameModel extends BaseModel {
     public mapId: number;
-    public playerData: any;
+    public playerData: {
+        mcName:string,
+        propertyData: IRpgGameObjectPropertyData
+    };
     public monsterNum: number;
 
     public constructor($controller: BaseController) {

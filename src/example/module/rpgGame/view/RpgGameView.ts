@@ -59,7 +59,7 @@ class RpgGameView extends BaseSpriteView {
         this.blocksData = mapData.blocks;
     }
 
-    private createPlayer(playData: any): void {
+    private createPlayer(playData: { mcName: string, propertyData: IRpgGameObjectPropertyData }): void {
         const col: number = App.RandomUtils.limitInteger(1, this.blocksData[0].length - 2);
         const row: number = App.RandomUtils.limitInteger(1, this.blocksData.length - 2);
 
