@@ -59,7 +59,7 @@ class RpgGameView extends BaseSpriteView {
         this.blocksData = mapData.blocks;
     }
 
-    private createPlayer(playData: { mcName: string, propertyData: IRpgGameObjectPropertyData }): void {
+    private createPlayer(playerData: { mcName: string, mcPath: string, skillPath: string, propertyData: IRpgGameObjectPropertyData }): void {
         const col: number = App.RandomUtils.limitInteger(1, this.blocksData[0].length - 2);
         const row: number = App.RandomUtils.limitInteger(1, this.blocksData.length - 2);
 
@@ -67,11 +67,11 @@ class RpgGameView extends BaseSpriteView {
         this.player.init({
             col: col,
             row: row,
-            mcName: playData.mcName,
-            mcPath: "resource/assets/rpgGame/player/",
-            skillPath: "resource/assets/rpgGame/skill/",
+            mcName: playerData.mcName,
+            mcPath: playerData.mcPath,
+            skillPath: playerData.skillPath,
             gameView: this,
-            propertyData: playData.propertyData,
+            propertyData: playerData.propertyData,
             objectType: ObjectType.Player
         });
     }
