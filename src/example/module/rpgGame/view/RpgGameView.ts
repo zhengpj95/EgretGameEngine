@@ -59,9 +59,20 @@ class RpgGameView extends BaseSpriteView {
         this.blocksData = mapData.blocks;
     }
 
+    // 在中心区域随机生成玩家坐标点
+    private getPlayerPos(): number[] {
+        const blocks = this.blocksData;
+        const colMid = Math.floor(blocks[0].length / 2);
+        const rowMid = Math.floor(blocks.length / 2);
+        const col = App.RandomUtils.limitInteger(Math.max(1, colMid - 3), Math.max(blocks[0].length - 2, colMid + 3));
+        const row = App.RandomUtils.limitInteger(Math.max(1, rowMid - 3), Math.max(blocks.length - 2, colMid + 3));
+        return [col, row];
+    }
+
     private createPlayer(playerData: { mcName: string, mcPath: string, skillPath: string, propertyData: IRpgGameObjectPropertyData }): void {
-        const col: number = App.RandomUtils.limitInteger(1, this.blocksData[0].length - 2);
-        const row: number = App.RandomUtils.limitInteger(1, this.blocksData.length - 2);
+        const pos = this.getPlayerPos();
+        const col: number = pos[0];
+        const row: number = pos[1];
 
         this.player = ObjectPool.pop("RpgPlayer");
         this.player.init({
