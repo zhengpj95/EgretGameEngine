@@ -102,7 +102,7 @@ class RpgGameView extends BaseSpriteView {
         }
 
         monstersData.sort(function (a, b) {
-            if (a.propertyData.dis < a.propertyData.dis) {
+            if (a.propertyData.dis < b.propertyData.dis) {
                 return -1;
             } else {
                 return 1;
