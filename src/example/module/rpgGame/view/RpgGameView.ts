@@ -65,6 +65,7 @@ class RpgGameView extends BaseSpriteView {
 
         this.player = ObjectPool.pop("RpgPlayer");
         this.player.init({
+            id: 1001,
             col: col,
             row: row,
             mcName: playerData.mcName,
@@ -84,12 +85,12 @@ class RpgGameView extends BaseSpriteView {
             var mcName: string = "monster_" + App.RandomUtils.limitInteger(0, 9);
             var mcPath: string = "resource/assets/rpgGame/monster/";
             monstersData.push({
+                id: 2001 + i,
                 col: col,
                 row: row,
                 mcName: mcName,
                 mcPath: mcPath,
                 gameView: this,
-                // dis: App.MathUtils.getDistance(col, row, this.player.col, this.player.row),
                 propertyData: {
                     name: "monster_" + App.RandomUtils.limitInteger(1, 1000),
                     attackDis: 3,

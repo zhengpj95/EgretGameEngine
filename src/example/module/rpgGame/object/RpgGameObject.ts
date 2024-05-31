@@ -134,17 +134,18 @@ class RpgGameObject {
 
 /**rpg场景实体数据接口*/
 interface RpgGameObjectVO {
-    id?: number;
-    col?: number;
-    row?: number;
-    gameView?: RpgGameView;
-    mcPath?: string;
-    mcName?: string;
+    id: number;
+    col: number;
+    row: number;
+    mcPath: string;
+    mcName: string;
+    gameView: RpgGameView;
+    objectType: ObjectType;
+    propertyData: IRpgGameObjectPropertyData;
+
     skillPath?: string;
-    speed?: number;
-    dir?: Dir;
-    propertyData?: IRpgGameObjectPropertyData;
-    objectType?: ObjectType;
+    speed?: number; // 默认 RpgGameData.WalkSpeed
+    dir?: Dir; // 默认 Dir.Bottom
 }
 
 /**场景实体vo身上的propertyData数据*/
