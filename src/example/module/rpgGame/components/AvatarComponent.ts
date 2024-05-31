@@ -18,7 +18,7 @@ class AvatarComponent extends Component {
 
         this.body = ObjectPool.pop("egret.DisplayObjectContainer");
         this.body.addChild(this.mc);
-        if (this.entity.data.objectType == ObjectType.Player) {
+        if (this.entity.vo.objectType == ObjectType.Player) {
             this.body.name = '_rpgPlayer';
         }
         this.entity.gameView.getGameObjectLayer().addChild(this.body);

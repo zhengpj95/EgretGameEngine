@@ -6,8 +6,8 @@ class RpgPlayer extends RpgGameObject {
         super();
     }
 
-    public init(data: RpgGameObjectVO): void {
-        super.init(data);
+    public init(vo: RpgGameObjectVO): void {
+        super.init(vo);
 
         this.addComponent(ComponentType.Avatar);
         this.addComponent(ComponentType.AvatarSkill);

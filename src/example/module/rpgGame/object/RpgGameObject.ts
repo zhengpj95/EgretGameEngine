@@ -19,9 +19,9 @@ class RpgGameObject {
     public dir: Dir;
     public pathChange: boolean;
     public action: string;
-    public propertyData: any;
+    public propertyData: IRpgGameObjectPropertyData;
     public battleObj: RpgGameObject;
-    private _data: RpgGameObjectVO;
+    private _vo: RpgGameObjectVO;
 
     private _inCamera: boolean;
     private _path: PathNode[];
@@ -30,22 +30,26 @@ class RpgGameObject {
         this._components = {};
     }
 
-    public get data() {
-        return this._data;
+    public get vo() {
+        return this._vo;
     }
 
-    public init(data: RpgGameObjectVO): void {
-        this._data = data;
-        this.id = data.id;
-        this.col = data.col;
-        this.row = data.row;
-        this.gameView = data.gameView;
-        this.mcPath = data.mcPath;
-        this.mcName = data.mcName;
-        this.skillPath = data.skillPath;
-        this.speed = data.speed || RpgGameData.WalkSpeed;
-        this.dir = data.dir || Dir.Bottom;
-        this.propertyData = data.propertyData;
+    public set vo(vo: RpgGameObjectVO) {
+        this._vo = vo;
+    }
+
+    public init(vo: RpgGameObjectVO): void {
+        this.vo = vo;
+        this.id = vo.id;
+        this.col = vo.col;
+        this.row = vo.row;
+        this.gameView = vo.gameView;
+        this.mcPath = vo.mcPath;
+        this.mcName = vo.mcName;
+        this.skillPath = vo.skillPath;
+        this.speed = vo.speed || RpgGameData.WalkSpeed;
+        this.dir = vo.dir || Dir.Bottom;
+        this.propertyData = vo.propertyData;
 
         const p: egret.Point = RpgGameUtils.convertCellToXY(this.col, this.row);
         this.x = p.x;
